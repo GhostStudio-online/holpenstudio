@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body class="bg-zinc-900">
+    <header class="w-full fixed bottom-0 left-0 backdrop-blur-xl rounded-t-2xl ">
+        <div class="px-4 py-6">
+            <div class="grid grid-cols-3" id="hd-sections"></div>
+        </div>
+    </header>
+
+    <main class="h-screen p-4">
+        <section class="h-full block" id="products">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="productscont"></div>
+        </section>
+        <section class="h-full hidden" id="profile">
+            <div class="flex flex-col gap-4">
+                <!-- Панель профиля -->
+                <div class="grid grid-cols-[64px_auto] gap-4 items-center bg-zinc-800 p-4 rounded-xl">
+                    <img id="user-photo" src="" alt="avatar" class="w-16 h-16 rounded-full border border-zinc-700">
+                    <div class="flex flex-col">
+                        <h3 id="user-name" class="text-white font-bold text-xl"></h3>
+                        <p id="user-username" class="text-gray-400 text-sm"></p>
+                    </div>
+                </div>
+
+                <!-- Дополнительные блоки -->
+                <div class="bg-zinc-800 p-4 rounded-xl">
+                    <h4 class="text-white font-semibold text-lg">О себе</h4>
+                    <p class="text-gray-400 text-sm mt-2">Тут можно будет выводить инфу о пользователе, статистику покупок и т.п.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/products.js"></script>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        const user = tg.initDataUnsafe?.user;
+
+        if (user) {
+            document.getElementById('user-photo').src = user.photo_url || "https://via.placeholder.com/64";
+            document.getElementById('user-name').textContent = `${user.first_name || ""} ${user.last_name || ""}`;
+            document.getElementById('user-username').textContent = user.username ? "@" + user.username : "Без username";
+        }
+    </script>
+
+    <script>
+        const hdsections = document.getElementById('hd-sections');
+
+        const sections = [
+            { name: 'Профиль', icon: 'fa-user', id: 'profile-btn' },
+            { name: 'Товары', icon: 'fa-cart-shopping', id: 'products-btn' },
+            { name: 'Поддержка', icon: 'fa-message', id: 'support-btn' }
+        ];
+
+        const sectionlist = sections.map(section => `<div class="flex flex-col justify-center items-center gap-1 text-gray-400" id="${section.id}">
+            <i class="fa-solid ${section.icon} text-lg"></i>
+            <h4 class="text-sm font-normal tracking-tight">${section.name}</h4>
+        </div>`).join('');
+
+        hdsections.innerHTML = sectionlist;
+    </script>
+
+    <script src="./js/changesection.js"></script>
+</body>
+</html>
