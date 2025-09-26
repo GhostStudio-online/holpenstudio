@@ -1,31 +1,16 @@
-// Sections
-const productsct = document.getElementById('products');
-const profilesct = document.getElementById('profile');
+const pageSections = document.querySelectorAll('main section');
+const hdbtns = document.querySelectorAll('.hd-btns');
 
-// Buttons
-const profilebtn = document.getElementById('profile-btn');
-const productsbtn = document.getElementById('products-btn');
-const supportbtn = document.getElementById('support-btn');
-
-function changesection(section) {
-    if (section === 'profile') {
-        productsct.classList.add('hidden');
-        productsct.classList.remove('block');
-        profilesct.classList.add('block');
-        profilesct.classList.remove('hidden');
-    }
-    else if (section === 'products') { 
-        profilesct.classList.remove('block');
-        profilesct.classList.add('hidden');
-        productsct.classList.remove('hidden');
-        productsct.classList.add('block');
-    }
+function changesection(id) {
+    pageSections.forEach(section => section.classList.add('hidden'));
+    document.getElementById(id)?.classList.remove('hidden');
 }
 
-profilebtn.addEventListener('click', () => {
-    changesection('profile');
+hdbtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+        changesection(target);
+    });
 });
 
-productsbtn.addEventListener('click', () => {
-    changesection('products');
-});
+changesection('products');
