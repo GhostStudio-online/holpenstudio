@@ -28,9 +28,9 @@
                 </div>
 
                 <!-- Дополнительные блоки -->
-                <div class="bg-zinc-800 p-4 rounded-xl">
-                    <h4 class="text-white font-semibold text-lg">О себе</h4>
-                    <p class="text-gray-400 text-sm mt-2">Тут можно будет выводить инфу о пользователе, статистику покупок и т.п.</p>
+                <div class="bg-zinc-800 p-4 rounded-xl flex flex-col items-center">
+                    <h4 class="text-white font-semibold text-xl">Заказы:</h4>
+                    <div class="grid grid-cols-2 gap-4 mt-2" id="orders"></div>
                 </div>
             </div>
         </section>
@@ -38,11 +38,30 @@
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="productscont"></div>
         </section>
         <section class="h-full hidden" id="support">
-            <div>Пока пусто...</div>
+            <div class="text-white">Пока пусто...</div>
         </section>
     </main>
 
     <script src="./js/products.js"></script>
+
+    <script>
+        const ordersec = document.getElementById('orders');
+        
+        let orders = [
+            { icon: './src/images/products/v1.jpeg', alt: 'Товар V1', name: 'Первью V1 (Пример)', price: 199, status: 'Оплачен' },
+            { icon: './src/images/products/v1.jpeg', alt: 'Товар V1', name: 'Первью V1 (Пример)', price: 199, status: 'Не оплачен' }
+        ];
+
+        const orderlist = orders.map(order => `<div class="flex flex-col relative p-2 border border-gray-400/60 rounded-lg">
+                            <div class="w-[100%]">
+                                <img src="${order.icon}" alt="${order.alt}" class="w-full h-full rounded-lg">
+                            </div>
+                            <h2 class="text-gray-100 text-xl font-semibold tracking-tight">${order.name}</h2>
+                            <h3 class="text-gray-300 text-md font-semibold tracking-tight">Цена: ${order.price}₴</h3>
+                            <h4 class="px-2 py-1 bg-blue-600 text-sm text-white rounded-md absolute top-[3%] right-[2%]">${order.status}</h4>
+                        </div>`).join('');
+        ordersec.innerHTML = orderlist;
+    </script>
 
     <script>
         const tg = window.Telegram.WebApp;
