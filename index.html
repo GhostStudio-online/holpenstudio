@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body class="bg-zinc-950">
-    <header class="w-full fixed bottom-0 left-0 bg-zinc-900 rounded-t-lg">
+    <header class="w-full fixed bottom-0 left-0 bg-zinc-900 rounded-t-lg z-150">
         <div class="px-4 py-6">
             <div class="grid grid-cols-3" id="hd-sections"></div>
         </div>
@@ -17,7 +17,7 @@
 
     <main class="h-screen p-4">
         <section class="h-full hidden" id="profile">
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 pb-20">
                 <!-- Панель профиля -->
                 <div class="grid grid-cols-[64px_auto] gap-4 items-center bg-zinc-800 p-4 rounded-xl">
                     <img id="user-photo" src="" alt="avatar" class="w-16 h-16 rounded-full border border-zinc-700">
@@ -30,7 +30,7 @@
                 <!-- Дополнительные блоки -->
                 <div class="bg-zinc-800 p-4 rounded-xl flex flex-col items-center">
                     <h4 class="text-white font-semibold text-xl">Заказы:</h4>
-                    <div class="grid grid-cols-2 gap-4 mt-4" id="orders"></div>
+                    <div class="grid grid-cols-2 gap-4 mt-2" id="orders"></div>
                 </div>
             </div>
         </section>
@@ -43,25 +43,7 @@
     </main>
 
     <script src="./js/products.js"></script>
-
-    <script>
-        const ordersec = document.getElementById('orders');
-        
-        let orders = [
-            { icon: './src/images/products/v1.jpeg', alt: 'Товар V1', name: 'Первью V1 (Пример)', price: 199, status: 'Оплачен' },
-            { icon: './src/images/products/v1.jpeg', alt: 'Товар V1', name: 'Первью V1 (Пример)', price: 199, status: 'Не оплачен' }
-        ];
-
-        const orderlist = orders.map(order => `<div class="flex flex-col relative gap-3 p-2 border border-gray-300/60 rounded-lg">
-                            <div class="w-[100%]">
-                                <img src="${order.icon}" alt="${order.alt}" class="w-full h-full rounded-lg">
-                            </div>
-                            <h2 class="text-gray-100 text-lg font-semibold tracking-tight">${order.name}</h2>
-                            <h3 class="text-gray-300 text-sm font-semibold tracking-tight">Цена: ${order.price}₴</h3>
-                            <h4 class="px-2 py-1 bg-blue-600 text-sm text-white rounded-md absolute top-[3%] right-[2%]">${order.status}</h4>
-                        </div>`).join('');
-        ordersec.innerHTML = orderlist;
-    </script>
+    <script src="./js/orders.js"></script>
 
     <script>
         const tg = window.Telegram.WebApp;
