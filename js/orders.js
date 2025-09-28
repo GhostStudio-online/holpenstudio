@@ -1,7 +1,7 @@
 const ordersec = document.getElementById('orders');
 
 async function loadOrders() {
-    const responce = await fetch('https://5ef8bbba3091.ngrok-free.app/api/orders');
+    const responce = await fetch('http://4.tcp.eu.ngrok.io:19293/api/orders');
     const orders = await responce.json();
 
     const orderlist = orders.map(order => `
