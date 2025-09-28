@@ -1,7 +1,7 @@
 const productsection = document.getElementById('productscont');
 
 async function loadProducts() {
-    const responce = await fetch('https://5ef8bbba3091.ngrok-free.app/api/products');
+    const responce = await fetch('http://4.tcp.eu.ngrok.io:19293/api/products');
     const products = await responce.json();
 
     const productslist = products.map(product => `
@@ -31,7 +31,7 @@ async function loadProducts() {
                 alt: card.querySelector('img').alt
             };
             try {
-                const res = await fetch('https://5ef8bbba3091.ngrok-free.app/api/sendOrder', {
+                const res = await fetch('http://4.tcp.eu.ngrok.io:19293/api/sendOrder', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(order)
@@ -47,3 +47,4 @@ async function loadProducts() {
 }
 
 loadProducts();
+
