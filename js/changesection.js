@@ -1,9 +1,9 @@
-const pageSections = document.querySelectorAll('.section');
+const pageSections = document.querySelectorAll('main section');
 const hdbtns = document.querySelectorAll('.hd-btns');
 
 function changesection(id) {
-    pageSections.forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    pageSections.forEach(section => section.classList.add('hidden'));
+    document.getElementById(id)?.classList.remove('hidden');
 
     // сбрасываем цвет всем
     hdbtns.forEach(btn => {
@@ -25,3 +25,6 @@ hdbtns.forEach(btn => {
 });
 
 changesection('products');
+
+// pageSections.forEach(section => { section.classList.add('hidden'); section.classList.remove('active'); });
+// document.getElementById(id)?.classList.add('active');
