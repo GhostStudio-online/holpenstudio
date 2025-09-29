@@ -78,7 +78,7 @@
                         last_name: user.last_name || ''
                     };
 
-                    const response = await fetch('http://localhost:3000/api/addUser', {
+                    const response = await fetch('https://holpenstudioback-production.up.railway.app/api/addUser', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -125,3 +125,4 @@
     <script src="./js/changesection.js"></script>
 </body>
 </html>
+
