@@ -10,6 +10,9 @@ function changesection(id) {
         btn.classList.remove('text-blue-600');
         btn.classList.add('text-white');
     });
+    
+    pageSections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 
     // активной кнопке даём синий
     const activeBtn = document.querySelector(`[data-target="${id}"]`);
