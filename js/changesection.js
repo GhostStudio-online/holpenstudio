@@ -1,18 +1,15 @@
-const pageSections = document.querySelectorAll('main section');
+const pageSections = document.querySelectorAll('.section');
 const hdbtns = document.querySelectorAll('.hd-btns');
 
 function changesection(id) {
-    pageSections.forEach(section => section.classList.add('hidden'));
-    document.getElementById(id)?.classList.remove('hidden');
+    pageSections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 
     // сбрасываем цвет всем
     hdbtns.forEach(btn => {
         btn.classList.remove('text-blue-600');
         btn.classList.add('text-white');
     });
-    
-    pageSections.forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
 
     // активной кнопке даём синий
     const activeBtn = document.querySelector(`[data-target="${id}"]`);
