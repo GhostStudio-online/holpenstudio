@@ -1,7 +1,7 @@
 const ordersec = document.getElementById('orders');
 
 async function loadOrders() {
-    const responce = await fetch('holpenstudioback-production.up.railway.app/api/orders');
+    const responce = await fetch('https://holpenstudioback-production.up.railway.app/api/orders');
     const orders = await responce.json();
 
     const orderlist = orders.map(order => `
