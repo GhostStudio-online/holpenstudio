@@ -38,6 +38,7 @@ async function loadProducts() {
                 });
                 const data = await res.json();
                 console.log('Заказ отправлен', data);
+                alert("Вы успешно заказали товар:" + order.name);
                 loadOrders();
             } catch (err) {
                 console.log('Ошибка при отправке заказа:', err);
@@ -47,6 +48,7 @@ async function loadProducts() {
 }
 
 loadProducts();
+
 
 
 
