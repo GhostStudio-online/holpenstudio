@@ -1,7 +1,7 @@
 const productsection = document.getElementById('productscont');
 
 async function loadProducts() {
-    const responce = await fetch('http://4.tcp.eu.ngrok.io:19293/api/products');
+    const responce = await fetch('https://holpenstudioback-production.up.railway.app/api/products');
     const products = await responce.json();
 
     const productslist = products.map(product => `
@@ -47,4 +47,5 @@ async function loadProducts() {
 }
 
 loadProducts();
+
 
