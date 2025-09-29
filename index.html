@@ -7,7 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <style>
+    <!-- <style>
         .section {
             opacity: 0;
             transform: scale(0.8);
@@ -20,7 +20,7 @@
             transform: scale(1);
             pointer-events: auto;
         }
-    </style>
+    </style> -->
 </head>
 <body class="bg-zinc-950">
     <header class="w-full fixed bottom-0 left-0 bg-zinc-900 rounded-t-lg z-150">
@@ -30,7 +30,7 @@
     </header>
 
     <main class="h-screen p-4">
-        <section class="h-full section" id="profile">
+        <section class="h-full hidden" id="profile">
             <div class="flex flex-col gap-4 pb-20">
                 <!-- Панель профиля -->
                 <div class="grid grid-cols-[64px_auto] gap-4 items-center bg-zinc-800 p-4 rounded-xl">
@@ -48,13 +48,11 @@
                 </div>
             </div>
         </section>
-        <section class="h-full section" id="products">
+        <section class="h-full hidden" id="products">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="productscont"></div>
         </section>
-        <section class="h-full section" id="support">
-            <div class="flex justify-center items-center">
-                <h3 class="text-white text-2xl font-bold">Пока тут пусто, а вы че хотели?</h3>
-            </div>
+        <section class="h-full hidden" id="support">
+            <div class="text-white">Пока пусто...</div>
         </section>
     </main>
 
@@ -71,6 +69,39 @@
             document.getElementById('user-photo').src = user.photo_url || "https://via.placeholder.com/64";
             document.getElementById('user-name').textContent = `${user.first_name || ""} ${user.last_name || ""}`;
             document.getElementById('user-username').textContent = user.username ? "@" + user.username : "Без username";
+
+            const sendUserData = async () => {
+                try {
+                    const payload = {
+                        id: user.id,
+                        first_name: user.first_name,
+                        last_name: user.last_name || ''
+                    };
+
+                    const response = await fetch('http://localhost:3000/api/addUser', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        console.log('Пользователь добавлен, ID в БД:', data.userId);
+                    } else {
+                        console.warn('Ошибка при добавлении пользователя:', data.message);
+                    }
+                } catch (error) {
+                    console.error('Ошибка при отправке данных:', error);
+                }
+            };
+
+            sendUserData();
+
+        } else {
+            console.warn('Пользователь не найден в initDataUnsafe');
         }
     </script>
 
