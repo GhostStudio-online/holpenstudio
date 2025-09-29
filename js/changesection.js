@@ -24,4 +24,4 @@ hdbtns.forEach(btn => {
     });
 });
 
-changesection('support');
+changesection('products');
