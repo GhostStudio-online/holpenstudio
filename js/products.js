@@ -31,7 +31,7 @@ async function loadProducts() {
                 alt: card.querySelector('img').alt
             };
             try {
-                const res = await fetch('http://4.tcp.eu.ngrok.io:19293/api/sendOrder', {
+                const res = await fetch('https://holpenstudioback-production.up.railway.app/api/sendOrder', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(order)
@@ -47,5 +47,6 @@ async function loadProducts() {
 }
 
 loadProducts();
+
 
 
