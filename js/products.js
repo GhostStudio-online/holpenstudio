@@ -5,12 +5,12 @@ async function loadProducts() {
     const products = await responce.json();
 
     const productslist = products.map(product => `
-        <div class="flex flex-col justify-center gap-3 px-2 py-3" data-id="${product.id}">
+        <div class="flex flex-col justify-center gap-3 p-4 border border-gray-300/10 backdrop-blur-xl rounded-xl" data-id="${product.id}">
             <div class="w-[100%]">
                 <img src="${product.icon}" alt="${product.alt}" class="w-full h-full rounded-lg">
             </div>
             <div class="flex flex-col">
-                <h3 class="font-bold text-gray-200 text-lg">${product.name}</h3>
+                <h3 class="font-bold text-gray-300 text-lg">${product.name}</h3>
                 <p class="font-medium text-gray-400 text-sm">${product.description}</p>
             </div>
             <h5 class="font-medium text-gray-300 text-base">Цена: ${product.price}₴</h5>
@@ -31,14 +31,13 @@ async function loadProducts() {
                 alt: card.querySelector('img').alt
             };
             try {
-                const res = await fetch('https://holpenstudioback-production.up.railway.app/api/sendOrder', {
+                const res = await fetch('http://localhost:3000/api/sendOrder', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(order)
                 });
                 const data = await res.json();
                 console.log('Заказ отправлен', data);
-                alert("Вы успешно заказали товар:" + order.name);
                 loadOrders();
             } catch (err) {
                 console.log('Ошибка при отправке заказа:', err);
@@ -48,7 +47,3 @@ async function loadProducts() {
 }
 
 loadProducts();
-
-
-
-
