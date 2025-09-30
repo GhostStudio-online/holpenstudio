@@ -5,7 +5,7 @@ async function loadOrders() {
     const orders = await responce.json();
 
     const orderlist = orders.map(order => `
-        <div class="flex flex-col relative p-2 border border-gray-400/60 rounded-lg">
+        <div class="flex flex-col relative p-2 border border-gray-300/20 backdrop-blur-xl rounded-lg">
             <div class="w-[100%]">
                 <img src="${order.icon}" alt="${order.alt}" class="w-full h-full rounded-lg">
             </div>
