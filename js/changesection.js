@@ -2,7 +2,7 @@ const pageSections = document.querySelectorAll('main section');
 const hdbtns = document.querySelectorAll('.hd-btns');
 
 function changesection(id) {
-    pageSections.forEach(section => section.classList.add('hidden'));
+    pageSections.forEach(section => { section.classList.add('hidden'); section.classList.add('opacity-0');});
     document.getElementById(id)?.classList.remove('hidden');
 
     // сбрасываем цвет всем
