@@ -7,14 +7,14 @@ function changesection(id) {
 
     // сбрасываем цвет всем
     hdbtns.forEach(btn => {
-        btn.classList.remove('text-blue-600');
+        btn.classList.remove('text-blue-500');
         btn.classList.add('text-white');
     });
 
     // активной кнопке даём синий
     const activeBtn = document.querySelector(`[data-target="${id}"]`);
     activeBtn?.classList.remove('text-white');
-    activeBtn?.classList.add('text-blue-600');
+    activeBtn?.classList.add('text-blue-500');
 }
 
 hdbtns.forEach(btn => {
