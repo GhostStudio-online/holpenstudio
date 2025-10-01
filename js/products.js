@@ -5,16 +5,16 @@ async function loadProducts() {
     const products = await responce.json();
 
     const productslist = products.map(product => `
-        <div class="flex flex-col justify-center gap-3 p-4 border border-gray-300/10 backdrop-blur-xl rounded-xl" data-id="${product.id}">
+        <div class="flex flex-col justify-center gap-3 p-4 border border-gray-300/10 bg-zinc-700/30 backdrop-blur-xl rounded-xl tracking-tight" data-id="${product.id}">
             <div class="w-[100%]">
                 <img src="${product.icon}" alt="${product.alt}" class="w-full h-full rounded-lg">
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col gap-1">
                 <h3 class="font-bold text-gray-300 text-lg">${product.name}</h3>
                 <p class="font-medium text-gray-400 text-sm">${product.description}</p>
             </div>
-            <h5 class="font-medium text-gray-300 text-base">Цена: ${product.price}₴</h5>
-            <button class="buy-btn w-full py-2 bg-blue-700 rounded-xl text-gray-100 font-semibold transition duration-300 ease-in-out hover:scale-105 active:scale-95">Купить</button>
+            <h5 class="font-medium text-gray-300 text-base">Цена: <span class="text-blue-400">${product.price}₴</span></h5>
+            <button class="buy-btn w-full py-2 bg-blue-700 rounded-xl text-gray-100 font-semibold shadow-md shadow-blue-700/30 transition duration-300 ease-in-out hover:scale-105 active:scale-95">Купить</button>
         </div>
     `).join('');
 
@@ -31,7 +31,7 @@ async function loadProducts() {
                 alt: card.querySelector('img').alt
             };
             try {
-                const res = await fetch('https://holpenstudioback-production.up.railway.app/api/sendOrder', {
+                const res = await fetch('http://localhost:3000/api/sendOrder', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(order)
@@ -47,4 +47,3 @@ async function loadProducts() {
 }
 
 loadProducts();
-
