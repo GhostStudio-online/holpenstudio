@@ -31,13 +31,14 @@ async function loadProducts() {
                 alt: card.querySelector('img').alt
             };
             try {
-                const res = await fetch('http://localhost:3000/api/sendOrder', {
+                const res = await fetch('https://holpenstudioback-production.up.railway.app/api/sendOrder', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(order)
                 });
                 const data = await res.json();
                 console.log('Заказ отправлен', data);
+                alert('Вы создали заказ на товар: ' + order.name + '.');
                 loadOrders();
             } catch (err) {
                 console.log('Ошибка при отправке заказа:', err);
@@ -47,3 +48,4 @@ async function loadProducts() {
 }
 
 loadProducts();
+
