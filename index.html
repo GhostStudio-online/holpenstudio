@@ -8,6 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- <link rel="stylesheet" href="./src/styles/output.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        section.active {
+            animation: sectionAnimation 0.5s ease-in-out;
+        }
+
+        @keyframes sectionAnimation {
+            0% {
+                opacity: 0;
+                /* transform: scale(0.85); */
+            }
+
+            100% {
+                opacity: 1;
+                /* transform: scale(1); */
+            }
+        }
+    </style>
 </head>
 <body class="bg-zinc-950">
     <header class="w-full fixed bottom-0 left-0 bg-zinc-950/80 backdrop-blur-md rounded-t-lg z-150">
@@ -16,7 +33,7 @@
         </div>
     </header>
 
-    <main class="min-h-screen p-4 backdrop-blur-3xl">
+    <main class="min-h-screen z-50 p-4 backdrop-blur-3xl">
         <section class="h-full hidden" id="profile">
             <div class="flex flex-col gap-4 pb-20">
                 <!-- Панель профиля -->
@@ -24,6 +41,7 @@
                     <img id="user-photo" src="" alt="avatar" class="w-16 h-16 rounded-full border border-zinc-700">
                     <div class="flex flex-col">
                         <h3 id="user-name" class="text-white font-bold text-xl"></h3>
+                        <h3 class="text-gray-200 text-base font-semibold tracking-tight">Роль: <span id="user-role" class="text-blue-500 text-base font-medium">Owner</span></h3>
                         <p id="user-username" class="text-gray-400 text-sm"></p>
                     </div>
                 </div>
@@ -67,8 +85,7 @@
                         last_name: user.last_name || ''
                     };
 
-                    // const res = await fetch('https://holpenstudioback-production.up.railway.app/api/addUser'
-                    const response = await fetch('http://localhost:3000/api/addUser', {
+                    const response = await fetch('https://holpenstudioback-production.up.railway.app/api/addUser', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -88,7 +105,22 @@
                 }
             };
 
-            sendUserData();
+            const getUserRole = async () => {
+                try {
+                    const roleResponse = await fetch(`https://holpenstudioback-production.up.railway.app/api/getUserRole/${user.id}`);
+                    const roleData = await roleResponse.json();
+
+                    if (roleData.role) {
+                        document.getElementById('user-role').textContent = roleData.role;
+                    } else {
+                        console.warn('Роль пользователя не найдена');
+                    }
+                } catch (error) {
+                    console.error('Ошибка при получении роли:', error);
+                }
+            };
+
+            sendUserData().then(getUserRole);
 
         } else {
             console.warn('Пользователь не найден в initDataUnsafe');
