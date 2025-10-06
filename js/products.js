@@ -1,7 +1,7 @@
 const productsection = document.getElementById('productscont');
 
 async function loadProducts() {
-    const responce = await fetch('https://holpenstudioback-production.up.railway.app/api/products');
+    const responce = await fetch('https://holpenstudioback-production.up.railway.app/api/products/get');
     const products = await responce.json();
 
     const productslist = products.map(product => `
@@ -31,7 +31,7 @@ async function loadProducts() {
                 alt: card.querySelector('img').alt
             };
             try {
-                const res = await fetch('https://holpenstudioback-production.up.railway.app/api/sendOrder', {
+                const res = await fetch('https://holpenstudioback-production.up.railway.app/api/orders/create', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(order)
@@ -48,3 +48,4 @@ async function loadProducts() {
 }
 
 loadProducts();
+
