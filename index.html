@@ -16,12 +16,10 @@
         @keyframes sectionAnimation {
             0% {
                 opacity: 0;
-                /* transform: scale(0.85); */
             }
 
             100% {
                 opacity: 1;
-                /* transform: scale(1); */
             }
         }
     </style>
@@ -36,7 +34,6 @@
     <main class="min-h-screen z-50 p-4 backdrop-blur-3xl">
         <section class="h-full hidden" id="profile">
             <div class="flex flex-col gap-4 pb-20">
-                <!-- Панель профиля -->
                 <div class="grid grid-cols-[64px_auto] gap-4 items-center p-4 border border-gray-300/10 backdrop-blur-xl rounded-xl">
                     <img id="user-photo" src="" alt="avatar" class="w-16 h-16 rounded-full border border-zinc-700">
                     <div class="flex flex-col">
@@ -46,7 +43,6 @@
                     </div>
                 </div>
 
-                <!-- Дополнительные блоки -->
                 <div class="flex flex-col items-center p-4 gap-4 border border-gray-300/10 backdrop-blur-xl rounded-xl">
                     <h4 class="text-white font-semibold text-xl">Заказы:</h4>
                     <div class="grid grid-cols-2 gap-4 mt-2" id="orders"></div>
@@ -85,7 +81,7 @@
                         last_name: user.last_name || ''
                     };
 
-                    const response = await fetch('https://holpenstudioback-production.up.railway.app/api/addUser', {
+                    const response = await fetch('https://holpenstudioback-production.up.railway.app/api/users/create', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -107,7 +103,7 @@
 
             const getUserRole = async () => {
                 try {
-                    const roleResponse = await fetch(`https://holpenstudioback-production.up.railway.app/api/getUserRole/${user.id}`);
+                    const roleResponse = await fetch(`https://holpenstudioback-production.up.railway.app/api/users/get/role/${user.id}`);
                     const roleData = await roleResponse.json();
 
                     if (roleData.role) {
@@ -146,4 +142,5 @@
 
     <script src="./js/changesection.js"></script>
 </body>
+
 </html>
